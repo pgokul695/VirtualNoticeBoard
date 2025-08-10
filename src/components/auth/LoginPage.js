@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
-import { LogIn, UserPlus } from 'lucide-react';
+// import { LogIn, UserPlus } from 'lucide-react'; // Removed unused icons
 
 const LoginPage = () => {
   const [isSigningUp, setIsSigningUp] = useState(false);
@@ -63,7 +63,6 @@ const LoginPage = () => {
 
         <div className="auth-divider">or</div>
         
-        {/* Placeholder for Google/Social Sign In */}
         <button className="btn btn-secondary w-full" disabled={loading}>
           Continue with Google
         </button>
