@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 
 // Import main stylesheet
@@ -15,10 +15,7 @@ import LoginPage from './components/auth/LoginPage';
 import NoticeList from './components/notices/NoticeList';
 import AdminDashboard from './pages/AdminDashboard';
 import ProfilePage from './pages/ProfilePage';
-import CategoryPage from './pages/CategoryPage'; // <-- The new page for departments/clubs
-// In App.js, inside your admin-only routes
-import CreateNoticePage from './pages/CreateNoticePage'; // <-- Import the new page
-
+import CategoryPage from './pages/CategoryPage';
 
 // Layout component that includes the header for authenticated routes
 const AuthenticatedLayout = ({ children }) => (
@@ -32,7 +29,6 @@ const AuthenticatedLayout = ({ children }) => (
 
 // Main App Component that contains routing logic
 const AppContent = () => {
-  const location = useLocation();
   const { user, loading } = useAuth();
 
   // Show a loading indicator while checking auth status
@@ -60,29 +56,18 @@ const AppContent = () => {
                 <Route path="/notices" element={<NoticeList />} />
                 <Route path="/profile" element={<ProfilePage />} />
                 
-                {/* New dynamic routes for departments and clubs */}
+                {/* Dynamic routes for departments and clubs */}
                 <Route path="/departments/:name" element={<CategoryPage />} />
                 <Route path="/clubs/:name" element={<CategoryPage />} />
 
                 {/* Admin-only route */}
                 <Route
-                  path="/admin"
+                  path="/admin/*" // Added wildcard to handle nested admin routes
                   element={
                     <ProtectedRoute requiredRole="admin">
                       <AdminDashboard />
                     </ProtectedRoute>
                   }
-                />
-
-                {/* New route for creating notices */}
-                <Route
-                  path="/admin/create-notice"
-                  element={
-                    <ProtectedRoute requiredRole="admin">
-                      <CreateNoticePage />
-                    </ProtectedRoute>
-                  }
-                  
                 />
 
                 {/* Catch-all for authenticated users, redirects to home */}
@@ -97,7 +82,6 @@ const AppContent = () => {
 };
 
 // The main App component that wraps everything with providers
-// The <Router> (or <BrowserRouter>) should be in your index.js file wrapping this App component.
 const App = () => (
   <AuthProvider>
     <AppContent />
