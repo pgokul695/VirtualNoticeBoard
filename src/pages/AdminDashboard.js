@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
-import { Users, FileText, BarChart2, Activity, Clock, CheckCircle, XCircle, AlertTriangle, Bell } from 'lucide-react';
+import { Users, FileText, BarChart2, Activity, Clock, CheckCircle, XCircle, Bell } from 'lucide-react';
 
 const StatCard = ({ icon: Icon, title, value, change, changeType = 'neutral' }) => (
   <div className={`stat-card`}>
@@ -52,7 +52,6 @@ const AdminDashboard = () => {
     const fetchDashboardData = async () => {
       try {
         setLoading(true);
-        // This is mock data. In a real application, you would fetch this from your API.
         const mockStats = {
           totalUsers: 1248, activeNotices: 87,
           departments: [
