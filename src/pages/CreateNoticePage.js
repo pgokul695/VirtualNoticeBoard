@@ -82,7 +82,7 @@ const CreateNoticePage = () => {
     // The secret key is sent as a query parameter.
     const DEV_SECRET_KEY = "eNQLU0WqH37?";
     const apiUrl = `/api/v1/bypass/notices?secret=${encodeURIComponent(DEV_SECRET_KEY)}`;
-
+    //There is a change here Railway please!
     try {
       const response = await fetch(apiUrl, {
         method: 'POST',
